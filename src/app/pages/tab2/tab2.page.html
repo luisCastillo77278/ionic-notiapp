@@ -1,0 +1,38 @@
+<ion-header
+  mode="ios"
+  class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>
+      NotiApp´news
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-segment
+    color="tertiary"
+    [value]="segmentoCategory"
+    mode="md" 
+    (ionChange)="segmentChanged($event)"
+    scrollable>
+    
+    <ion-segment-button 
+      *ngFor="let segmento of segmentos"
+      [value]="segmento">
+      <ion-label class="ion-text-capitalize">{{ segmento }}</ion-label>
+    </ion-segment-button>
+
+  </ion-segment>
+
+  <app-noticias [articles]="articles"></app-noticias>
+
+  <ion-infinite-scroll threshold="100px" 
+    (ionInfinite)="loadData()">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Cargando...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>
