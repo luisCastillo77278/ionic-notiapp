@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Article } from 'src/app/interfaces/Headlines.interface';
+import { FavoritesService } from '../../services/favorites.service';
 
 @Component({
   selector: 'app-tab3',
@@ -7,6 +9,11 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
-  constructor() {}
+  constructor(
+    private favoriteService: FavoritesService
+  ) {}
 
+  get articles(): Article[]{
+    return this.favoriteService.articlesService;
+  }
 }
