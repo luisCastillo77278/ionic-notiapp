@@ -1,4 +1,6 @@
-# Nota
+# NotiApp´news
+
+## Nota
 El proyecto solo puede ejecutarse de manera local, ya que la Api de noticas utilizada, solo permite la utilización de forma gratuita en un ambiente local. Si quiere hacer un deploy del proyecto fuera de un ambiente local hay que cambiar la cuenta por una de pago. [Saber mas.](https://newsapi.org/pricing)
 
 ## Pasos para correr el proyecto
