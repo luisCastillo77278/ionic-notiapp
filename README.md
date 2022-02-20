@@ -29,6 +29,18 @@ Ejecutar el proyecto en entorno de desarrollo basta con ejecutar
 ionic serve
 ```
 
+### Al generar el proyecto para produción
+```
+ionic build --prod
+```
+**Nota**
+hay un error favor de añadir lo siguiente en el archivo .browserslistrc
+```
+not IE 9-11
+not ios_saf 15.2-15.3
+not safari 15.2-15.3
+````
+
 - [Documentación de NewsApi](https://newsapi.org/docs)
 - [Documentación de ionic](https://ionicframework.com/docs/)
 - [Documentación de angular](https://angular.io/docs)

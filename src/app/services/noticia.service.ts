@@ -6,12 +6,14 @@ import { Article, HeadLines, ArticlesByCategoryAndPages } from '../interfaces/He
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { storedArticlesByCategory } from '../data/mock-news';
+
 @Injectable({
   providedIn: 'root'
 })
 export class NoticiaService {
 
-  private articlesByCategoryAndPages: ArticlesByCategoryAndPages = {};
+  private articlesByCategoryAndPages: ArticlesByCategoryAndPages = storedArticlesByCategory;
 
   constructor(
     private http: HttpClient
@@ -27,6 +29,8 @@ export class NoticiaService {
   }
 
   getTopHeadlinesByCategorys( category: string, loadMore: boolean ): Observable<Article[]>{
+
+    return of(this.articlesByCategoryAndPages[category].articles);
 
     if(loadMore){
       return this.getArticlesByCategory(category);
