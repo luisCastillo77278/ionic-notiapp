@@ -42,6 +42,12 @@ export class NoticiaComponent {
     const articleInFavorite = this.favoriteService.articleInFavorite(this.article);
 
     const buttons: ActionSheetButton[] = [
+      {// puede que esto se pueda comentar
+        text: 'Share',
+        icon: 'share-social-outline',
+        id: 'share',
+        handler: ()=>this.shareOptions()
+      },
       {
         text: (articleInFavorite) ? 'Remove' : 'Favorite',
         icon: (articleInFavorite) ? 'heart' : 'heart-outline',
@@ -55,16 +61,16 @@ export class NoticiaComponent {
       }
     ];
 
-    const shareBtn: ActionSheetButton = {
-      text: 'Share',
-      icon: 'share-social-outline',
-      id: 'share',
-      handler: ()=>this.shareOptions()
-    };
+    // const shareBtn: ActionSheetButton = {
+    //   text: 'Share',
+    //   icon: 'share-social-outline',
+    //   id: 'share',
+    //   handler: ()=>this.shareOptions()
+    // };
 
-    if( this.platform.is('cordova') ){
-      buttons.unshift(shareBtn);
-    }
+    // if( this.platform.is('cordova') ){
+    //   buttons.unshift(shareBtn);
+    // }
 
     const action = await this.actionSheetCtrl.create({
       header: 'Options',
@@ -76,13 +82,26 @@ export class NoticiaComponent {
 
   shareOptions(){
     console.log('click share');
-
-    this.socialSharing.share(
-      this.article.title,
-      this.article.source.name,
-      null,
-      this.article.url
-    );
+    if( this.platform.is('cordova') ){
+      this.socialSharing.share(
+        this.article.title,
+        this.article.source.name,
+        null,
+        this.article.url
+      );
+    }else{
+      if(navigator.share){
+        navigator.share({
+          title: this.article.title,
+          text: this.article.source.name,
+          url: this.article.url,
+        })
+          .then(() => console.log('Successful share'))
+          .catch((error) => console.log('Error sharing', error));
+      }else{
+        console.log('el navegador no soporta share');
+      }
+    }
 
   }
 

@@ -25,10 +25,10 @@ export class NoticiaService {
     //   .pipe(
     //     map( ({articles}) => articles)
     //   );
-    return this.getArticlesByCategory('business');
+    return this.getTopHeadlinesByCategorys('business');
   }
 
-  getTopHeadlinesByCategorys( category: string, loadMore: boolean ): Observable<Article[]>{
+  getTopHeadlinesByCategorys( category: string, loadMore: boolean = false ): Observable<Article[]>{
 
     return of(this.articlesByCategoryAndPages[category].articles);
 
